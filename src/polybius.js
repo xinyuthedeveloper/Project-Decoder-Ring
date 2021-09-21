@@ -35,8 +35,10 @@ const polybiusModule = (function () {
   function polybiusEncode(input) {
     const inputArray = input.toUpperCase().split('');
     const encodedArray = inputArray.map((letter) => {
-      if (letter == ' ') return letter;
-      return square.find((item) => item.character.includes(letter)).key);
+      if (letter == ' ') return (letter);
+      else {
+        return square.find((item) => item.character.includes(letter)).key;
+      }
     });
     return encodedArray.join('');
   }
@@ -47,7 +49,9 @@ const polybiusModule = (function () {
     const inputArray = updated.match(/.{1,2}/g);
     const decodedArray = inputArray.map((letter) => {
       if (letter == '00') return (' ');
-      return square.find((item) => item.key === letter).character);
+      else {
+        return square.find((item) => item.key === letter).character;
+      }
     });
     return decodedArray.join('').toLowerCase();
   }
