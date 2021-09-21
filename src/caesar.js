@@ -8,24 +8,24 @@ const caesarModule = (function () {
   const alphabet = "abcdefghijklmnopqrstuvwxyz";
   function caesar(input, shift, encode = true) {
     // your solution code here
-    if (!shift || shift === 0 || shift < -25 || shift > 25) return false;
+    if (!shift || shift < -25 || shift > 25) return false;
     const inputArray = input.toLowerCase().split("");
     const output = inputArray.map((letter) => {
       if (!alphabet.includes(letter)) return letter;
       else {
+        let shiftedIndex = alphabet.indexOf(letter);
         if (encode) {
-          let shiftedIndex = alphabet.indexOf(letter) + shift;
+          shiftedIndex += shift;
           if (shiftedIndex > 25) (shiftedIndex -= 26);
-          else if (shiftedIndex < 0) (shiftedIndex += 26);
-          return alphabet[shiftedIndex];          
+          else if (shiftedIndex < 0) (shiftedIndex += 26);        
         }
         else {
-          let shiftedIndex = alphabet.indexOf(letter) - shift;
+          shiftedIndex -= shift;
           if (shiftedIndex < 0) (shiftedIndex += 26);
-          else if (shiftedIndex > 25) (shiftedIndex -= 26);
-          return alphabet[shiftedIndex];          
+          else if (shiftedIndex > 25) (shiftedIndex -= 26);          
         }
       }
+      return alphabet[shiftedIndex];    
     });
     return output.join("");
   };
