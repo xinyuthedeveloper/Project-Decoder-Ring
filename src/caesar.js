@@ -12,18 +12,16 @@ const caesarModule = (function () {
     const inputArray = input.toLowerCase().split("");
     const output = inputArray.map((letter) => {
       if (!alphabet.includes(letter)) return letter;
+      let shiftedIndex = alphabet.indexOf(letter);
+      if (encode) {
+        shiftedIndex += shift;
+        if (shiftedIndex > 25) (shiftedIndex -= 26);
+        else if (shiftedIndex < 0) (shiftedIndex += 26);
+      }
       else {
-        let shiftedIndex = alphabet.indexOf(letter);
-        if (encode) {
-          shiftedIndex += shift;
-          if (shiftedIndex > 25) (shiftedIndex -= 26);
-          else if (shiftedIndex < 0) (shiftedIndex += 26);        
-        }
-        else {
-          shiftedIndex -= shift;
-          if (shiftedIndex < 0) (shiftedIndex += 26);
-          else if (shiftedIndex > 25) (shiftedIndex -= 26);          
-        }
+        shiftedIndex -= shift;
+        if (shiftedIndex < 0) (shiftedIndex += 26);
+        else if (shiftedIndex > 25) (shiftedIndex -= 26);
       }
       return alphabet[shiftedIndex];    
     });
